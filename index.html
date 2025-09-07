@@ -8,14 +8,17 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome for social icons -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <style>
+    :root{
+      --muted: #4a4a4a;
+      --bg: #f7f6f3;
+      --footer: #eae8e0;
+    }
+    *{box-sizing:border-box}
     body {
       font-family: 'Playfair Display', serif;
       margin: 0;
-      background-color: #f7f6f3;
+      background-color: var(--bg);
       color: #333;
       text-align: center;
     }
@@ -47,7 +50,7 @@
     }
 
     nav a {
-      color: #4a4a4a;
+      color: var(--muted);
       text-decoration: none;
       padding: 0.5rem 1rem;
       border-radius: 5px;
@@ -58,38 +61,96 @@
       background-color: #dcd6cb;
     }
 
+    /* Dropdown container */
+    .dropdown {
+      position: relative;
+      display: flex; /* plutôt que inline-block */
+      align-items: center;
+    }
+
+    .dropdown > a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown > a:hover {
+      background-color: #dcd6cb;
+    }
+    
+    .submenu {
+      display: none;
+      position: absolute;
+      background-color: #f0ede6;
+      min-width: 160px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1;
+      flex-direction: column;
+      text-align: left;
+    }
+    
+    .submenu a {
+      display: block;
+      padding: 0.5rem 1rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .submenu a:hover {
+      background-color: #dcd6cb;
+    }
+
+    .dropdown:hover .submenu {
+      display: flex;
+    }
+
     section {
       padding: 2rem;
     }
 
+    article {
+      margin: 1.5rem 0;
+    }
+
     footer {
-      background-color: #eae8e0;
+      background-color: var(--footer);
       padding: 1.5rem 1rem;
       font-size: 0.9rem;
     }
 
     .social-icons {
       margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
     }
 
-    .social-icons a {
-      margin: 0 12px;
-      color: #4a4a4a;
-      text-decoration: none;
-      font-size: 1.6rem;
-      transition: color 0.3s ease;
+    .social-icons a{
+      width:44px;
+      height:44px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      text-decoration:none;
+      transition: transform .18s ease;
     }
+    .social-icons a:hover{ transform: translateY(-3px); }
 
-    .social-icons a:hover {
-      color: #3b5998; /* Facebook */
-    }
+    .social-icons svg{ width:32px; height:32px; display:block; }
 
-    .social-icons a.instagram:hover {
-      color: #e4405f; /* Instagram */
-    }
-
-    .social-icons a.tiktok:hover {
-      color: #000; /* TikTok (no official color) */
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
     }
   </style>
 </head>
@@ -101,10 +162,14 @@
   </header>
 
   <nav>
-    <a href="#adoptions">Adoptions</a>
-    <a href="#chiens">Chiens</a>
-    <a href="#chats">Chats</a>
-    <a href="#autres">Autres</a>
+    <div class="dropdown">
+      <a href="#adoptions">Adoptions</a>
+      <div class="submenu">
+        <a href="#chiens">Chiens</a>
+        <a href="#chats">Chats</a>
+        <a href="#autres">Autres</a>
+      </div>
+    </div>
     <a href="#evenements">Événements</a>
     <a href="#rejoignez-nous">Rejoignez-nous</a>
     <a href="#contact">Contact</a>
@@ -142,20 +207,46 @@
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Pour toute question ou adoption, contactez-nous à : <a href="mailto:contact@amis-arche.org">contact@amis-arche.org</a></p>
+    <p>Pour toute question ou adoption, contactez-nous : </p>
+    <p><a href="mailto:contact.lesamisdelarchedenoe@gmail.com">contact.lesamisdelarchedenoe@gmail.com</a> <br>
+    Téléphone : 06.60.63.88.57</p>
   </section>
 
   <footer>
     &copy; 1993 - 2025 Les Amis de l'Arche de Noé. Tous droits réservés.
-    <div class="social-icons">
-      <a href="https://www.facebook.com/Les.amis.de.larche.de.noe/" target="_blank" aria-label="Facebook">
-        <i class="fab fa-facebook-square"></i>
+    <div class="social-icons" aria-label="Liens vers nos réseaux sociaux">
+      <!-- Facebook official logo -->
+      <a class="facebook" href="https://www.facebook.com/Les.amis.de.larche.de.noe/" target="_blank" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="false">
+          <title>Facebook</title>
+          <path fill="#1877F2" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.093 10.125 24v-8.437H7.078V12.07h3.047V9.412c0-3.021 1.792-4.688 4.533-4.688 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.49 0-1.953.925-1.953 1.874v2.284h3.328l-.532 3.493h-2.796V24C19.612 23.093 24 18.1 24 12.073z"/>
+        </svg>
+        <span class="sr-only">Facebook</span>
       </a>
-      <a href="https://www.instagram.com/lesamisdelarchedenoe/" target="_blank" class="instagram" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
+
+      <!-- Instagram official logo -->
+      <a class="instagram" href="https://www.instagram.com/lesamisdelarchedenoe/" target="_blank" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="false">
+          <title>Instagram</title>
+          <radialGradient id="a" cx="1.464" cy="0.464" r="1.29" gradientTransform="matrix(0 1 -.777 0 1.1 -.004)" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#fd5"/>
+            <stop offset=".5" stop-color="#ff543e"/>
+            <stop offset="1" stop-color="#c837ab"/>
+          </radialGradient>
+          <path fill="url(#a)" d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.35 3.608 1.325.975.975 1.263 2.242 1.325 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.263-3.608 1.325-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.263-2.242-1.325-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.35-2.633 1.325-3.608.975-.975 2.242-1.263 3.608-1.325C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.072 5.772.131 4.64.363 3.678 1.326c-.963.963-1.195 2.094-1.254 3.374C2.365 5.98 2.352 6.389 2.352 12s.013 6.02.072 7.3c.059 1.28.291 2.411 1.254 3.374.963.963 2.094 1.195 3.374 1.254 1.28.059 1.689.072 7.3.072s6.02-.013 7.3-.072c1.28-.059 2.411-.291 3.374-1.254.963-.963 1.195-2.094 1.254-3.374.059-1.28.072-1.689.072-7.3s-.013-6.02-.072-7.3c-.059-1.28-.291-2.411-1.254-3.374C19.411.363 18.28.131 17 .072 15.72.013 15.311 0 12 0zm0 5.838A6.162 6.162 0 0 0 5.838 12 6.162 6.162 0 0 0 12 18.162 6.162 6.162 0 0 0 18.162 12 6.162 6.162 0 0 0 12 5.838zm0 10.162A3.999 3.999 0 1 1 12 8a3.999 3.999 0 0 1 0 7.999zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+        </svg>
+        <span class="sr-only">Instagram</span>
       </a>
-      <a href="https://tiktok.com/@lesamisdelarchedenoe" target="_blank" class="tiktok" aria-label="TikTok">
-        <i class="fab fa-tiktok"></i>
+
+      <!-- TikTok official logo -->
+      <a class="tiktok" href="https://tiktok.com/@lesamisdelarchedenoe" target="_blank" aria-label="TikTok">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-hidden="false">
+          <title>TikTok</title>
+          <path fill="#25F4EE" d="M37.5 12.5c-2.3-1.6-4.1-3.8-4.8-6.4h-6.1v26.9c0 3-2.5 5.5-5.5 5.5s-5.5-2.5-5.5-5.5c0-3 2.5-5.5 5.5-5.5 0.4 0 0.8 0 1.2 0.1v-6.2c-0.4 0-0.8-0.1-1.2-0.1-6.3 0-11.5 5.2-11.5 11.5s5.2 11.5 11.5 11.5c6.3 0 11.5-5.2 11.5-11.5V21.9c2.3 1.6 5 2.6 8 2.6v-6c-1.2 0-2.5-0.4-3.5-1z"/>
+          <path fill="#FE2C55" d="M32.7 19.7v-3.6c-1.2-1-2.2-2.2-3-3.6h-2.9v14.3c0 3-2.5 5.5-5.5 5.5s-5.5-2.5-5.5-5.5c0-2.7 1.9-5 4.4-5.4v-6.1c-5.8 0.4-10.4 5.2-10.4 11.1 0 6.1 5 11.1 11.1 11.1 6.1 0 11.1-5 11.1-11.1V19.7z"/>
+          <path fill="#000" d="M37.5 12.5c-2.3-1.6-4.1-3.8-4.8-6.4h-6.1v26.9c0 3-2.5 5.5-5.5 5.5s-5.5-2.5-5.5-5.5c0-3 2.5-5.5 5.5-5.5 0.4 0 0.8 0 1.2 0.1v-6.2c-0.4 0-0.8-0.1-1.2-0.1-6.3 0-11.5 5.2-11.5 11.5s5.2 11.5 11.5 11.5c6.3 0 11.5-5.2 11.5-11.5V21.9c2.3 1.6 5 2.6 8 2.6v-6c-1.2 0-2.5-0.4-3.5-1z"/>
+        </svg>
+        <span class="sr-only">TikTok</span>
       </a>
     </div>
   </footer>
