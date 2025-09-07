@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Les Amis de l'Arche de Noé</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for social icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
   <style>
     body {
       font-family: 'Playfair Display', serif;
@@ -58,15 +64,39 @@
 
     footer {
       background-color: #eae8e0;
-      padding: 1rem;
+      padding: 1.5rem 1rem;
       font-size: 0.9rem;
+    }
+
+    .social-icons {
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      margin: 0 12px;
+      color: #4a4a4a;
+      text-decoration: none;
+      font-size: 1.6rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #3b5998; /* Facebook */
+    }
+
+    .social-icons a.instagram:hover {
+      color: #e4405f; /* Instagram */
+    }
+
+    .social-icons a.tiktok:hover {
+      color: #000; /* TikTok (no official color) */
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="logo.jpg" alt="Logo de l'association Les Amis de l'Arche de Noé">
+    <img src="logo.jpg" alt="Logo de l'association Les Amis de l'Arche de Noé" />
     <h1>Les Amis de l'Arche de Noé</h1>
   </header>
 
@@ -117,6 +147,17 @@
 
   <footer>
     &copy; 1993 - 2025 Les Amis de l'Arche de Noé. Tous droits réservés.
+    <div class="social-icons">
+      <a href="https://www.facebook.com/Les.amis.de.larche.de.noe/" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-square"></i>
+      </a>
+      <a href="https://www.instagram.com/lesamisdelarchedenoe/" target="_blank" class="instagram" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://tiktok.com/@lesamisdelarchedenoe" target="_blank" class="tiktok" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+    </div>
   </footer>
 
 </body>
